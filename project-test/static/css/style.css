@@ -1,0 +1,27 @@
+body {
+    color: white;
+    background-color: #373737;
+}
+
+
+.jumbotron {
+    background-color: #003f5c;
+}
+
+.panel-primary>.panel-heading {
+    
+    background-color: #003f5c;
+    border-color: #003f5c;
+}
+
+.panel-body{
+    background-color: #486581;
+}
+
+.well {
+    background-color:#003f5c;
+}
+
+#selDataset {
+    color: #003f5c;
+}
