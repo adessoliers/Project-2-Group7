@@ -1,12 +1,8 @@
 import os
+from flask import Flask, jsonify, render_template, redirect, request
 import pandas as pd
 import psycopg2
 import psycopg2.extras
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
-from flask import Flask, jsonify, render_template, redirect, request
 
 # Database Setup
 hostname = 'localhost'
@@ -30,7 +26,9 @@ app = Flask(__name__)
 def home():
     return render_template ('index.html')
 
-
+@app.route("/data/aqi_percent")
+def aqipercent():
+    return aqi_percent.to_json()
 
 
 
