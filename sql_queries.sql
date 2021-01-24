@@ -5,7 +5,8 @@ DROP TABLE IF EXISTS new_annual_aqi;
 DROP TABLE IF EXISTS new_annual_aqi_percentage;
 DROP TABLE IF EXISTS new_annual_generation;
 DROP TABLE IF EXISTS new_emission_data;
-
+DROP TABLE IF EXISTS state_geocoord;
+DROP TABLE updated_annual_aqi;
 -- Importing data into tables
 
 CREATE TABLE annual_aqi (
@@ -38,10 +39,14 @@ CREATE TABLE emission_data (
 );
 
 CREATE TABLE state_geocoord (
+	state_id INT NOT NULL,
+	state VARCHAR(30) NOT NULL,
 	latitude FLOAT NOT NULL,
 	longtitude FLOAT NOT NULL,
-	state VARCHAR(30) NOT NULL
+	 PRIMARY KEY (state_id)
 );
+
+
 
 SELECT * FROM state_geocoord;
 SELECT * FROM annual_aqi;
@@ -71,6 +76,18 @@ CREATE TABLE new_annual_aqi_percentage (
 	percentage_bad_days FLOAT NOT NULL
 );
 
+-- Joining tables to add state id to all dataset
+CREATE TABLE updated_annual_aqi AS (
+	SELECT geo.state_id, geo.state, aqi.year, aqi.percentage_good_days, aqi.percentage_bad_days
+	FROM state_geocoord AS geo
+	JOIN new_annual_aqi_percentage AS aqi
+	ON geo.state = aqi.state
+	ORDER BY geo.state_id, state
+);
+
+
+
+
 
 CREATE TABLE new_annual_generation AS (
 	SELECT state, year, energy_source, SUM(generation) AS total_generation
@@ -79,13 +96,36 @@ CREATE TABLE new_annual_generation AS (
 	ORDER BY energy_source, state, year);
 	
 
+CREATE TABLE updated_annual_generation AS (
+	SELECT geo.state_id, geo.state, g.year, g.energy_source, g.total_generation
+	FROM new_annual_generation AS g
+	JOIN state_geocoord AS geo
+	ON geo.state = g.state
+);
+
+
+
 CREATE TABLE new_emission_data AS (
 	SELECT state, year, pollution_code, SUM(emission) AS total_emission
 	FROM emission_data
 	GROUP BY pollution_code, year, state
 	ORDER BY pollution_code, state, year);
+	
+
+CREATE TABLE updated_emission_data AS (
+	SELECT geo.state_id, geo.state, e.year, e.pollution_code, e.total_emission
+	FROM new_emission_data AS e
+	JOIN state_geocoord AS geo
+	ON geo.state = e.state
+);
+
+
 
 SELECT * FROM new_annual_aqi;
 SELECT * FROM new_annual_aqi_percentage;
 SELECT * FROM new_annual_generation;
 SELECT * FROM new_emission_data;
+
+SELECT * FROM updated_annual_aqi;
+SELECT * FROM updated_annual_generation;
+SELECT * FROM updated_emission_data;
