@@ -70,3 +70,27 @@ if __name__ == '__main__':
 #     # Dict with date as the key and prcp as the value
 #     precip = {date: prcp for date, prcp in precipitation}
 #     return jsonify(precip)
+
+@app.route("/api/v1.0/geocoords")
+def test():
+    query = session.query(Geocoords.state).all()
+    states = list(np.ravel(query))
+    return jsonify(states)
+
+@app.route("/api/v1.0/geocoords")
+def test():
+    # Query lon and lat
+    coordinates_list = session.query(Geocoords.state, Geocoords.longitude, Geocoords.latitude)
+
+    # Convert results to a dict using state as key and lon/lat as values
+    coord = []
+    for state,longitude,latitude in coordinates_list:
+        coord_dict = {}
+        coord_dict[state] = state
+        coord_dict[longitude] = longitude
+        coord_dict[latitude] = latitude
+        coord.append(coord_dict)
+
+    # Return a json list of coordinates from the dataset
+    coordinates_list = list(np.ravel(coordinates_list))
+    return jsonify(coord)
