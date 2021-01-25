@@ -11,8 +11,8 @@ database = 'emissions_db'
 connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
 
 # Save references needed to view
-annual_aqi = pd.read_sql_query('select * from new_annual_aqi_percentage',con=connection)
-annual_generation = pd.read_sql_query('select * from new_annual_generation',con=connection)
+annual_aqi = pd.read_sql_query('select * from updated_annual_aqi',con=connection)
+annual_generation = pd.read_sql_query('select * from updated_annual_generation',con=connection)
 
 # Flask Setup
 app = Flask(__name__)
