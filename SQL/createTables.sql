@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS state;
 DROP TABLE IF EXISTS state_energy;
+DROP TABLE IF EXISTS state_greenhouse_emissions
+
 
 CREATE TABLE "state" (
 	"state" VARCHAR NOT NULL,
@@ -21,6 +23,16 @@ CREATE TABLE "state_energy" (
 	)
 );
 
+--CAREFUL CSV MAY HAVE "GREENHOUSE_EMISSION" with "s"
+CREATE TABLE "state_greenhouse_emissions" (
+	"state" VARCHAR NOT NULL,
+	"year" INT NOT NULL,
+	"greenhouse_emission" FLOAT NULL,
+	CONSTRAINT "pk_state_greenhouse_emissions" PRIMARY KEY ("state", "year")
+);
+
+---NOW IMPORT DATA, THEN---
+
 UPDATE state_energy
 SET co2_mt = 0
 where co2_mt is NULL;
@@ -37,7 +49,12 @@ UPDATE state_energy
 SET generation_mwh = 0
 where generation_mwh is NULL;
 
+
+
 ALTER TABLE "state_energy" ADD CONSTRAINT "fk_state_energy_state" FOREIGN KEY("state")
+REFERENCES "state" ("state");
+
+ALTER TABLE "state_greenhouse_emissions" ADD CONSTRAINT "fk_state_greenhouse_emissions_state" FOREIGN KEY("state")
 REFERENCES "state" ("state");
 
 
@@ -49,3 +66,6 @@ ORDER BY constraint_name;
 
 SELECT * FROM state;
 SELECT * FROM state_energy;
+SELECT * FROM state_greenhouse_emissions;
+
+
