@@ -1,8 +1,13 @@
-var stateUrl = 'static/data/state_energy_gen_data.json';
-let year = 2019;
-let statePlot='US';
+var stateUrl = 'static/data/greenhouse_data.json';
+// var genUrl = 'static/data/state_energy_gen_data.json';
 
-buildMap(stateUrl,year);
+// var stateUrl = $.getJSON("static/data/greenhouse_data.json")
+// console.log(stateUrl)
+
+let year = 2019;
+
+
+
 
 //EVENT LISTENER!
 d3.select('#slider_year').on('click',changeYear);
@@ -12,3 +17,11 @@ function changeYear() {
     let year = d3.select('#selected').property('value')
     buildMap(stateUrl,year)
 };
+
+
+// $.getJSON("../static/data/greenhouse_data.json", function(json) {
+//     console.log(json);
+// });
+
+
+

@@ -1,8 +1,8 @@
-var stateUrl = '/data/state_energy_gen_data';
+var stateUrl = "/data/greenhouse_data";
 let year = 2019;
-let statePlot='US';
 
-buildMap(stateUrl,year);
+
+
 
 //EVENT LISTENER!
 d3.select('#slider_year').on('click',changeYear);

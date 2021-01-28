@@ -16,6 +16,7 @@ connection = psycopg2.connect(host=hostname, user=username, password=password, d
 #Saving references to views
 greenhouse_data = pd.read_sql_query('select state, year, greenhouse_emission from state_greenhouse_emissions order by state, year', con=connection)
 state_energy_gen_data = pd.read_sql_query('select state, year, energy_source, generation_mwh, generation_percent from state_energy_by_year', con=connection)
+# state_energy = pd.read_sql
 
 #FlaskSetup
 app = Flask(__name__)
