@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/css/style.css">
   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
 </head>
 
 <body>
@@ -16,36 +18,36 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-        <h1>US Emissions Dashboard</h1>
-        <p>Diving into the effects of emissions on air quality in the US</p>
-        <p>Use the interactive charts below to explore the dataset</p>
+        <h1 class="animate__animated animate__bounceInDown">US Emissions Dashboard</h1>
+        <p class="animate__animated animate__bounceInDown">Diving into the effects of emissions on air quality in the US</p>
+        <p class="animate__animated animate__bounceInDown">Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-12">
         <div class="well">
           <h4><strong>State:</strong></h4>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong>Emissions</strong></h3>
-          </div>
-          <div id="emissions" class="panel-body"></div>
-        </div>
       </div>
-      <div class="col-md-10">
+      </div>
+      <div class="row">
+      <div class="col-md-6">
         <div id="bubble-chart"></div>
       </div>
-      <!-- <div class="col-md-5">
-        <div id="emissions-bar"></div>
-      </div> -->
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="map"></div>
+      <div class="col-md-6">
+        <div id="air-bar"></div>
       </div>
     </div>
+    <div class ="row">
+      
+    </div>
+
+
+    
+    </div>
+    
+    
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>

@@ -1,5 +1,5 @@
 url = "http://127.0.0.1:5000/generation"
-
+aqi = "http://127.0.0.1:5000/aqi-percentage"
 
 
 d3.json(url).then(function(data) {
@@ -25,6 +25,45 @@ optionChanged(states[0])
 
     function optionChanged(userInput) {
 
+        d3.json(aqi).then(function(data){
+            var aqidemoData = data
+            var aqidemoFilter = aqidemoData.filter(data => data.state == userInput)
+            
+            // Create xaxis that displays years
+            var aqiyear =  aqidemoFilter.map(year => year.year)
+            
+            // Create y axis that displays energy source
+            var aqi_good_days = aqidemoFilter.map(aqi_good_days => aqi_good_days.percentage_good_days)
+            
+            var traceaqi1 = {
+                x: aqiyear,
+                y: aqi_good_days,
+                type: "bar",
+                name: '% Good Days',
+            };
+            
+            var aqi_bad_days = aqidemoFilter.map(aqi_bad_days => aqi_bad_days.percentage_bad_days)
+            
+            yAxis = aqi_bad_days
+            
+            var traceaqi2 = {
+                x: aqiyear,
+                y: aqi_bad_days,
+                type: "bar",
+                name: '% Bad Days',
+            };
+            
+            var data = [traceaqi1, traceaqi2];
+            
+            var layout_bar = {
+                barmode: 'stack',
+                title: {text: "Percentage Good AQI Days vs Bad AQI Days"},
+                xaxis: {title: "Year"},
+                yaxis: {title: "% Days"}
+            };
+            
+            Plotly.newPlot("air-bar", data, layout_bar);
+        });
         d3.json(url).then(function(data){
 
             var demoData = data

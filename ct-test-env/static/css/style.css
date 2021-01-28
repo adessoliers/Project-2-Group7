@@ -5,13 +5,18 @@ body {
 
 
 .jumbotron {
+    color: #003f5c;
     background-color: #003f5c;
+    background-image: url("https://images.ctfassets.net/0fol1oltsp9p/7dw9XePKSgaPsXzmPCqvbE/64028ce9b09e620a0fde4689d1e3b6df/Why_Is_Renewable_Energy_Important.jpg?w=1200&h=630&fit=fill");
+    
 }
 
 .panel-primary>.panel-heading {
     
     background-color: #003f5c;
     border-color: #003f5c;
+    background-image: url("https://www.participatelearning.com/app/uploads/2018/05/3-resources-for-teaching-clean-and-renewable-energy-1280x720.png");
+
 }
 
 .panel-body{
@@ -24,4 +29,15 @@ body {
 
 #selDataset {
     color: #003f5c;
+}
+
+.row {
+    padding-bottom: 10px;
+}
+
+.well {
+    color: #003f5c;
+    text-align: center;
+    background-image: url("https://images.ctfassets.net/0fol1oltsp9p/7dw9XePKSgaPsXzmPCqvbE/64028ce9b09e620a0fde4689d1e3b6df/Why_Is_Renewable_Energy_Important.jpg?w=1200&h=630&fit=fill");
+
 }
